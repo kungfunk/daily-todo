@@ -1,7 +1,3 @@
-export function App() {
-  const test = 'test'
+import { Login } from "./components/Login";
 
-  return (
-    <p>{test}</p>
-  )
-}
+export const App = () => <Login />

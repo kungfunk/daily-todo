@@ -1,4 +1,15 @@
+:root {
+  --font-big: 2.2rem;
+  --font-regular: 1.8rem;
+  --font-small: 1.6rem;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
   margin: 0;
+  font-size: var(--font-regular);
 }
 
