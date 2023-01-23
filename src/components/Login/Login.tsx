@@ -1,18 +1,46 @@
-import { createClient } from "@supabase/supabase-js";
-import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import classes from "./Login.module.css";
+import { supabase } from "../../lib/supabase";
+import { FormEvent, useState } from "react";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
+export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-export const Login = () => (
-  <div className={classes.login}>
-    <Auth
-      supabaseClient={supabase}
-      appearance={{ theme: ThemeSupa }}
-      providers={["google", "github", "twitter"]}
-    />
-  </div>
-);
+    try {
+      setIsLoading(true);
+      const response = await supabase.auth.signInWithOtp({ email });
+      console.log(response);
+      if (response.error) {
+        throw new Error(error);
+      }
+    } catch (error: any) {
+      setError(error.error_description);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className={classes.login}>
+      <div>{error}</div>
+      <form onSubmit={handleOnSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="Your email"
+          value={email}
+          disabled={isLoading}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Sending..." : "Send magic link"}
+        </button>
+      </form>
+    </div>
+  );
+};
