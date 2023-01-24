@@ -6,5 +6,7 @@ App to track tasks in an easy way
 
 [] OpenAPI definition
 [] Deploy somewhere (netlify probably)
-[] Auth and data in supabase
+[x] Auth and data in supabase
 [x] Frontend with a lightweigth build step (vite)
+[] Use react-query for caching
+[] Use headless ui for components

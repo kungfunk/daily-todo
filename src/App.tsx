@@ -1,5 +1,5 @@
-import { Dashboard } from "./components/Dashboard";
-import { Login } from "./components/Login";
+import { Dashboard } from "./pages/dashboard";
+import { Login } from "./pages/login";
 import { useSession } from "./hooks/useSession";
 
 export const App = () => {

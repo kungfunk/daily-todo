@@ -1,4 +1,4 @@
-import classes from "./Login.module.css";
+import classes from "./login.module.css";
 import { supabase } from "../../lib/supabase";
 import { FormEvent, useState } from "react";
 
@@ -13,7 +13,6 @@ export const Login = () => {
     try {
       setIsLoading(true);
       const response = await supabase.auth.signInWithOtp({ email });
-      console.log(response);
       if (response.error) {
         throw new Error(error);
       }

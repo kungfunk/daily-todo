@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "../../hooks/useSession";
 import { Task } from "../../interfaces/tasks";
 import { supabase } from "../../lib/supabase";
+import { Button } from "../../components/button/button";
 
 export const Dashboard = () => {
   const session = useSession();
@@ -25,7 +26,7 @@ export const Dashboard = () => {
     supabase.auth.signOut().catch(console.error);
   };
 
-  const handleOnSubmit = async (e: any) => {
+  const handleAddTask = async (e: any) => {
     e.preventDefault();
 
     await supabase
@@ -47,13 +48,13 @@ export const Dashboard = () => {
       <div>
         {tasks.map((task) => (
           <p key={task.id}>
-            {task.description}{" "}
-            <button onClick={() => handleDelete(task.id)}>delete</button>
+            {task.description}
+            <Button onClick={() => handleDelete(task.id)}>delete</Button>
           </p>
         ))}
       </div>
-      <button onClick={() => handleLogout()}>logout</button>
-      <form onSubmit={handleOnSubmit}>
+      <Button onClick={handleLogout}>logout</Button>
+      <form onSubmit={handleAddTask}>
         <textarea
           id="description"
           name="description"
@@ -73,7 +74,7 @@ export const Dashboard = () => {
           <option value="LIFE">life</option>
           <option value="WORK">work</option>
         </select>
-        <button type="submit">Add task</button>
+        <Button type="submit">Add task</Button>
       </form>
     </>
   );
