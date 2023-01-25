@@ -1,0 +1,8 @@
+.task {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.task p {
+  margin: 0;
+}

@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import { useSession } from "../../hooks/useSession";
-import { Task } from "../../interfaces/tasks";
+import { Task } from "../../lib/types";
 import { supabase } from "../../lib/supabase";
-import { Button } from "../../components/button/button";
+import { Button } from "../../components/button";
+import { TaskView } from "../../components/task-view";
+import { generateSlug } from "../../lib/slug";
 
 export const Dashboard = () => {
   const session = useSession();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskData, setNewTaskData] = useState({
     description: "",
-    type: "LIFE",
-    status: "OPEN",
+    type: "work",
+    is_closed: false,
   });
 
   const loadTasks = async () => {
-    const { data } = await supabase.from("tasks").select<"*", Task>("*");
+    const { data } = await supabase
+      .from("tasks")
+      .select("*")
+      .eq("is_closed", false);
     setTasks(data || []);
   };
 
@@ -29,31 +34,31 @@ export const Dashboard = () => {
   const handleAddTask = async (e: any) => {
     e.preventDefault();
 
-    await supabase
-      .from("tasks")
-      .insert({ ...newTaskData, user_id: session?.user.id });
+    await supabase.from("tasks").insert({
+      ...newTaskData,
+      user_id: session!.user.id,
+      slug: generateSlug(),
+    });
 
     // just for testing
     loadTasks();
   };
 
-  const handleDelete = async (id: Task["id"]) => {
-    await supabase.from("tasks").delete().eq("id", id);
-    loadTasks();
-  };
-
   return (
     <>
-      <p>dashboard</p>
+      <div>
+        <a onClick={handleLogout}>Logout</a>
+      </div>
       <div>
         {tasks.map((task) => (
-          <p key={task.id}>
-            {task.description}
-            <Button onClick={() => handleDelete(task.id)}>delete</Button>
-          </p>
+          <TaskView
+            key={task.slug}
+            slug={task.slug}
+            description={task.description}
+            type={task.type}
+          />
         ))}
       </div>
-      <Button onClick={handleLogout}>logout</Button>
       <form onSubmit={handleAddTask}>
         <textarea
           id="description"
