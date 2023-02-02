@@ -1,5 +1,6 @@
 import { supabase } from "../../lib/supabase";
 import { Task } from "../../lib/types";
+import { Badge } from "../badge";
 import { Button } from "../button";
 import classes from "./task-view.module.css";
 
@@ -16,10 +17,11 @@ export const TaskView = ({
 
   return (
     <article className={classes.task}>
-      <span>{type}</span>
-      <p>
-        {description} <Button onClick={() => handleDelete(slug)}>delete</Button>
-      </p>
+      <Badge>{type}</Badge>
+      <p>{description}</p>
+      <div>
+        <Button onClick={() => handleDelete(slug)}>delete</Button>
+      </div>
     </article>
   );
 };

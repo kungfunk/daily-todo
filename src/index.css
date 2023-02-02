@@ -1,14 +1,24 @@
 :root {
   --font-big: 2.2rem;
   --font-regular: 1.8rem;
-  --font-small: 1.6rem;
+  --font-small: 1.2rem;
+
+  /* pico8 palette */
+  --color-black: rgba(0, 0, 0, 0.8);
+  --color-white: rgba(255, 255, 255, 1);
+  --color-blue: #29adff;
+  --color-red: #ff004d;
+  --color-pink: #ff77a8;
 }
 
 html {
   font-size: 62.5%;
+  font-weight: 400;
+  color: var(--color-black);
 }
 
 body {
   margin: 0;
   font-size: var(--font-regular);
+  line-height: 1.5em;
 }

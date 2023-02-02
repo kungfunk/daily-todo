@@ -1,14 +1,10 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-}
+import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
 export const Button = ({
   onClick,
   type,
   children,
-}: ButtonProps): JSX.Element => {
+}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>): JSX.Element => {
   return (
     <button onClick={onClick} type={type}>
       {children}

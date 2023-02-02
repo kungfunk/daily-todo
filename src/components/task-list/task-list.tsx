@@ -1,9 +1,5 @@
-import { ReactNode } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 
-interface TaskListProps {
-  children: ReactNode;
-}
-
-export const TaskList = ({ children }: TaskListProps): JSX.Element => {
+export const TaskList = ({ children }: PropsWithChildren): JSX.Element => {
   return <div>{children}</div>;
 };

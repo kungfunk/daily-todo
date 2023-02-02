@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Task } from "../../lib/types";
 import { supabase } from "../../lib/supabase";
-import { TaskView } from "../../components/task-view";
-import { TaskForm } from "../../components/task-form";
-import { LogoutButton } from "../../components/logout-button";
-import { TaskList } from "../../components/task-list";
+import { TaskView } from "../task-view";
+import { TaskForm } from "../task-form";
+import { TaskList } from "../task-list";
 
 export const Dashboard = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -23,9 +22,6 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div>
-        <LogoutButton />
-      </div>
       <TaskList>
         {tasks.map((task) => (
           <TaskView
