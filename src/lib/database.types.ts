@@ -16,8 +16,7 @@ export interface Database {
           description: string | null
           id: number
           is_closed: boolean
-          slug: string | null
-          type: string | null
+          slug: string
           user_id: string
         }
         Insert: {
@@ -26,8 +25,7 @@ export interface Database {
           description?: string | null
           id?: number
           is_closed: boolean
-          slug?: string | null
-          type?: string | null
+          slug: string
           user_id: string
         }
         Update: {
@@ -36,8 +34,7 @@ export interface Database {
           description?: string | null
           id?: number
           is_closed?: boolean
-          slug?: string | null
-          type?: string | null
+          slug?: string
           user_id?: string
         }
       }

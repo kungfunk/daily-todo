@@ -1,18 +1,19 @@
 import classes from "./login.module.css";
-import { supabase } from "../../lib/supabase";
 import { FormEvent, useState } from "react";
+import { useSupabase } from "../../hooks/useSupabase";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const client = useSupabase();
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       setIsLoading(true);
-      const response = await supabase.auth.signInWithOtp({ email });
+      const response = await client.auth.signInWithOtp({ email });
       if (response.error) {
         throw new Error(error);
       }

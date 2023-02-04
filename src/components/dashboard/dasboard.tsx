@@ -1,38 +1,29 @@
-import { useEffect, useState } from "react";
-import { Task } from "../../lib/types";
-import { supabase } from "../../lib/supabase";
 import { TaskView } from "../task-view";
 import { TaskForm } from "../task-form";
 import { TaskList } from "../task-list";
+import classes from "./dashboard.module.css";
+import { useTasksStorage } from "../../hooks/useTasksStorage";
 
 export const Dashboard = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { getOpenTasksQuery } = useTasksStorage();
+  const { data: tasks, isLoading, isError } = getOpenTasksQuery();
 
-  const loadTasks = async () => {
-    const { data } = await supabase
-      .from("tasks")
-      .select("*")
-      .eq("is_closed", false);
-    setTasks(data || []);
-  };
-
-  useEffect(() => {
-    loadTasks();
-  }, []);
+  if (isLoading) {
+    return <span>loading...</span>;
+  }
 
   return (
-    <>
+    <div className={classes.dashboard}>
       <TaskList>
-        {tasks.map((task) => (
-          <TaskView
-            key={task.slug}
-            slug={task.slug}
-            description={task.description}
-            type={task.type}
-          />
-        ))}
+        {tasks ? (
+          tasks.map(({ slug, description }) => (
+            <TaskView key={slug} slug={slug} description={description} />
+          ))
+        ) : (
+          <p>No open tasks, hurray!</p>
+        )}
       </TaskList>
       <TaskForm />
-    </>
+    </div>
   );
 };

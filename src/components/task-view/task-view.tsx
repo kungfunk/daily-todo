@@ -1,26 +1,20 @@
-import { supabase } from "../../lib/supabase";
+import { useTasksStorage } from "../../hooks/useTasksStorage";
 import { Task } from "../../lib/types";
-import { Badge } from "../badge";
 import { Button } from "../button";
 import classes from "./task-view.module.css";
 
-type TaskViewProps = Pick<Task, "slug" | "description" | "type">;
+export const TaskView = ({ slug, description }: Partial<Task>): JSX.Element => {
+  const { deleteTaskMutation } = useTasksStorage();
 
-export const TaskView = ({
-  slug,
-  description,
-  type,
-}: TaskViewProps): JSX.Element => {
-  const handleDelete = async (slug: TaskViewProps["slug"]) => {
-    await supabase.from("tasks").delete().eq("slug", slug);
+  const handleDelete = async (slug: string) => {
+    deleteTaskMutation.mutate(slug);
   };
 
   return (
     <article className={classes.task}>
-      <Badge>{type}</Badge>
       <p>{description}</p>
       <div>
-        <Button onClick={() => handleDelete(slug)}>delete</Button>
+        <Button onClick={() => handleDelete(slug as string)}>delete</Button>
       </div>
     </article>
   );
