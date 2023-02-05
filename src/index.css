@@ -6,9 +6,9 @@
   /* pico8 palette */
   --color-black: rgba(0, 0, 0, 0.8);
   --color-white: rgba(255, 255, 255, 1);
-  --color-grey: #c2c3c7;
+  --color-grey: #777777;
   --color-blue: #29adff;
-  --color-dark-blue: #1d2b53;
+  --color-dark-blue: #097ec6;
   --color-red: #ff004d;
   --color-pink: #ff77a8;
 }
@@ -20,6 +20,10 @@ html {
 }
 
 a {
+  color: var(--color-dark-blue);
+}
+
+a:hover {
   color: var(--color-blue);
 }
 

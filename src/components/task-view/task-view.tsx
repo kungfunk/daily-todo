@@ -1,7 +1,7 @@
-import formatRelative from "date-fns/formatRelative";
 import { useTasksStorage } from "../../hooks/useTasksStorage";
 import { Task } from "../../lib/types";
 import { Button } from "../button";
+import { Timedata } from "../timedata";
 import classes from "./task-view.module.css";
 
 export const TaskView = ({
@@ -21,36 +21,27 @@ export const TaskView = ({
     closeTaskMutation.mutate(slug);
   };
 
-  const readableDatetime = (value: string | null) => {
-    if (!value) {
-      return "";
-    }
-    const taskDate = new Date(value);
-    const currentDate = new Date();
-    return formatRelative(taskDate, currentDate, { addSuffix: true });
-  };
-
   return (
     <article className={classes.task}>
-      <p className={classes.description} onClick={() => handleClose(slug)}>
-        {description}
-      </p>
-      {is_closed ? (
-        <div className={classes.date}>
-          <span>closed </span>
-          <time>{readableDatetime(closed_at)}</time>
-        </div>
-      ) : (
-        <div className={classes.date}>
-          <span>created </span>
-          <time>{readableDatetime(created_at)}</time>
-        </div>
-      )}
-      <div className={classes.actions}>
-        <Button aria-label="Delete task" onClick={() => handleDelete(slug)}>
-          x
-        </Button>
-      </div>
+      <p className={classes.description}>{description}</p>
+      <footer className={classes.footer}>
+        {is_closed ? (
+          <Timedata prefix="Closed" date={closed_at} />
+        ) : (
+          <>
+            <Timedata prefix="Published" date={created_at} />
+            <div className={classes.actions}>
+              <Button showAsLink={true} onClick={() => handleDelete(slug)}>
+                Delete task
+              </Button>
+              <span>or</span>
+              <Button showAsLink={true} onClick={() => handleClose(slug)}>
+                Close task
+              </Button>
+            </div>
+          </>
+        )}
+      </footer>
     </article>
   );
 };

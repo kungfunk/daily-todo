@@ -7,13 +7,13 @@
   margin: 0;
 }
 
-.date {
-  font-size: var(--font-small);
-  color: var(--color-grey);
-  text-align: right;
-  font-style: italic;
+.footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .actions {
-  display: none;
+  display: flex;
+  gap: 0.5rem;
+  font-size: var(--font-small);
 }

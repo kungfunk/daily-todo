@@ -1,5 +1,6 @@
 .button {
   border: none;
+  cursor: pointer;
 }
 
 .button_as_link {
@@ -12,6 +13,12 @@
   font-weight: inherit;
   line-height: inherit;
   padding: 0;
+  /* end reset */
+  color: var(--color-dark-blue);
+  cursor: pointer;
+  text-decoration: underline;
+}
 
+.button_as_link:hover {
   color: var(--color-blue);
 }
