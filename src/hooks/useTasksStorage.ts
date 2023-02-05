@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useClient } from "../context/clientContext";
 import { generateSlug } from "../lib/slug";
 import { useSession } from "./useSession";
-import { useSupabase } from "./useSupabase";
 
 export function useTasksStorage() {
-  const client = useSupabase();
+  const client = useClient();
   const queryClient = useQueryClient();
   const session = useSession();
 
@@ -26,6 +26,10 @@ export function useTasksStorage() {
     }
   );
 
+  const closeTaskMutation = useMutation(async (slug: string) => {
+    return client.from(tasksTable).update({ is_closed: true }).eq("slug", slug);
+  });
+
   const addTaskMutation = useMutation(
     async (description: string) => {
       return client.from(tasksTable).insert({
@@ -42,14 +46,18 @@ export function useTasksStorage() {
     }
   );
 
-  const getOpenTasksQuery = () =>
+  const getTasksQuery = () =>
     useQuery(cacheKey, async () => {
       return client
         .from(tasksTable)
         .select("*")
-        .eq("is_closed", false)
         .then((result) => result.data);
     });
 
-  return { getOpenTasksQuery, deleteTaskMutation, addTaskMutation };
+  return {
+    getTasksQuery,
+    deleteTaskMutation,
+    addTaskMutation,
+    closeTaskMutation,
+  };
 }

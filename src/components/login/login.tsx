@@ -1,12 +1,12 @@
 import classes from "./login.module.css";
 import { FormEvent, useState } from "react";
-import { useSupabase } from "../../hooks/useSupabase";
+import { useClient } from "../../context/clientContext";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const client = useSupabase();
+  const client = useClient();
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

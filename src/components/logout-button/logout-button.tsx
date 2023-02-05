@@ -1,7 +1,7 @@
-import { useSupabase } from "../../hooks/useSupabase";
+import { useClient } from "../../context/clientContext";
 
 export const LogoutButton = (): JSX.Element => {
-  const client = useSupabase();
+  const client = useClient();
 
   const handleLogout = async () => {
     client.auth.signOut().catch(console.error);

@@ -10,6 +10,7 @@ export const TaskForm = (): JSX.Element => {
     e.preventDefault();
 
     addTaskMutation.mutate(description);
+    setDescription("");
   };
 
   return (
@@ -17,6 +18,7 @@ export const TaskForm = (): JSX.Element => {
       <textarea
         id="description"
         name="description"
+        placeholder="type something"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>

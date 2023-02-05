@@ -12,8 +12,8 @@ export interface Database {
       tasks: {
         Row: {
           closed_at: string | null
-          created_at: string | null
-          description: string | null
+          created_at: string
+          description: string
           id: number
           is_closed: boolean
           slug: string
@@ -21,8 +21,8 @@ export interface Database {
         }
         Insert: {
           closed_at?: string | null
-          created_at?: string | null
-          description?: string | null
+          created_at?: string
+          description?: string
           id?: number
           is_closed: boolean
           slug: string
@@ -30,8 +30,8 @@ export interface Database {
         }
         Update: {
           closed_at?: string | null
-          created_at?: string | null
-          description?: string | null
+          created_at?: string
+          description?: string
           id?: number
           is_closed?: boolean
           slug?: string
