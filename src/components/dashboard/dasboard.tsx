@@ -20,14 +20,7 @@ export const Dashboard = () => {
       <h1>Current tasks</h1>
       <TaskList>
         {openTasks ? (
-          openTasks.map(({ slug, description, created_at }) => (
-            <TaskView
-              key={slug}
-              slug={slug}
-              description={description}
-              created_at={created_at}
-            />
-          ))
+          openTasks.map((data) => <TaskView key={data.slug} {...data} />)
         ) : (
           <p>No open tasks, hurray!</p>
         )}
@@ -36,9 +29,7 @@ export const Dashboard = () => {
       <h2>Closed tasks</h2>
       <TaskList>
         {closedTasks ? (
-          closedTasks.map(({ slug, description }) => (
-            <TaskView key={slug} slug={slug} description={description} />
-          ))
+          closedTasks.map((data) => <TaskView key={data.slug} {...data} />)
         ) : (
           <p>No closed tasks yet, work harder!</p>
         )}

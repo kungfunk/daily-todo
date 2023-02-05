@@ -26,9 +26,19 @@ export function useTasksStorage() {
     }
   );
 
-  const closeTaskMutation = useMutation(async (slug: string) => {
-    return client.from(tasksTable).update({ is_closed: true }).eq("slug", slug);
-  });
+  const closeTaskMutation = useMutation(
+    async (slug: string) => {
+      return client
+        .from(tasksTable)
+        .update({ is_closed: true })
+        .eq("slug", slug);
+    },
+    {
+      onSuccess: () => {
+        queryClient.refetchQueries(cacheKey);
+      },
+    }
+  );
 
   const addTaskMutation = useMutation(
     async (description: string) => {
