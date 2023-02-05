@@ -8,6 +8,7 @@
   --color-white: rgba(255, 255, 255, 1);
   --color-grey: #c2c3c7;
   --color-blue: #29adff;
+  --color-dark-blue: #1d2b53;
   --color-red: #ff004d;
   --color-pink: #ff77a8;
 }
@@ -16,6 +17,10 @@ html {
   font-size: 62.5%;
   font-weight: 400;
   color: var(--color-black);
+}
+
+a {
+  color: var(--color-blue);
 }
 
 body {

@@ -30,7 +30,7 @@ export function useTasksStorage() {
     async (slug: string) => {
       return client
         .from(tasksTable)
-        .update({ is_closed: true })
+        .update({ is_closed: true, closed_at: Date.now().toString() })
         .eq("slug", slug);
     },
     {

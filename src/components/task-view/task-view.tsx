@@ -10,10 +10,7 @@ export const TaskView = ({
   created_at,
   closed_at,
   is_closed,
-}: Pick<
-  Task,
-  "slug" | "description" | "created_at" | "closed_at" | "is_closed"
->): JSX.Element => {
+}: Omit<Task, "id" | "user_id">): JSX.Element => {
   const { deleteTaskMutation, closeTaskMutation } = useTasksStorage();
 
   const handleDelete = (slug: string) => {
@@ -35,11 +32,20 @@ export const TaskView = ({
 
   return (
     <article className={classes.task}>
-      <p onClick={() => handleClose(slug)}>{description}</p>
-      <div className={classes.date}>
-        <span>{is_closed ? "closed" : "created"} </span>
-        <time>{readableDatetime(is_closed ? closed_at : created_at)}</time>
-      </div>
+      <p className={classes.description} onClick={() => handleClose(slug)}>
+        {description}
+      </p>
+      {is_closed ? (
+        <div className={classes.date}>
+          <span>closed </span>
+          <time>{readableDatetime(closed_at)}</time>
+        </div>
+      ) : (
+        <div className={classes.date}>
+          <span>created </span>
+          <time>{readableDatetime(created_at)}</time>
+        </div>
+      )}
       <div className={classes.actions}>
         <Button aria-label="Delete task" onClick={() => handleDelete(slug)}>
           x

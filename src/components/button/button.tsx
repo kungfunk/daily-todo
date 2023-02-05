@@ -1,12 +1,20 @@
 import { ButtonHTMLAttributes, PropsWithChildren } from "react";
+import classes from "./button.module.css";
 
 export const Button = ({
   onClick,
-  type,
+  type = "button",
   children,
-}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>): JSX.Element => {
+  showAsLink = false,
+}: PropsWithChildren<
+  ButtonHTMLAttributes<HTMLButtonElement> & { showAsLink?: boolean }
+>): JSX.Element => {
   return (
-    <button onClick={onClick} type={type}>
+    <button
+      className={showAsLink ? classes.button_as_link : classes.button}
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </button>
   );

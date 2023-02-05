@@ -1,4 +1,5 @@
 import { useClient } from "../../context/clientContext";
+import { Button } from "../button";
 
 export const LogoutButton = (): JSX.Element => {
   const client = useClient();
@@ -7,5 +8,9 @@ export const LogoutButton = (): JSX.Element => {
     client.auth.signOut().catch(console.error);
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <Button showAsLink={true} onClick={handleLogout}>
+      Logout
+    </Button>
+  );
 };
