@@ -61,6 +61,7 @@ export function useTasksStorage() {
       return client
         .from(tasksTable)
         .select("*")
+        .order("created_at", { ascending: false })
         .then((result) => result.data);
     });
 

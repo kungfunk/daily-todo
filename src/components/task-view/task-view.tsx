@@ -23,25 +23,28 @@ export const TaskView = ({
 
   return (
     <article className={classes.task}>
-      <p className={classes.description}>{description}</p>
-      <footer className={classes.footer}>
-        {is_closed ? (
-          <Timedata prefix="Closed" date={closed_at} />
-        ) : (
-          <>
-            <Timedata prefix="Published" date={created_at} />
-            <div className={classes.actions}>
-              <Button showAsLink={true} onClick={() => handleDelete(slug)}>
-                Delete
-              </Button>
-              <span>or</span>
-              <Button showAsLink={true} onClick={() => handleClose(slug)}>
-                Close task
-              </Button>
-            </div>
-          </>
-        )}
-      </footer>
+      <input
+        className={classes.check}
+        type="checkbox"
+        onClick={() => handleClose(slug)}
+      />
+      <div>
+        <p className={classes.description}>{description}</p>
+        <footer className={classes.footer}>
+          {is_closed ? (
+            <Timedata prefix="Closed" date={closed_at} />
+          ) : (
+            <>
+              <Timedata prefix="Published" date={created_at} />
+              <div className={classes.actions}>
+                <Button showAsLink={true} onClick={() => handleDelete(slug)}>
+                  Delete
+                </Button>
+              </div>
+            </>
+          )}
+        </footer>
+      </div>
     </article>
   );
 };
