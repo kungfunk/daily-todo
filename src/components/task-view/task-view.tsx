@@ -1,6 +1,7 @@
 import { useTasksStorage } from "../../hooks/useTasksStorage";
 import { Task } from "../../lib/types";
 import { Button } from "../button";
+import { Checkbox } from "../checkbox";
 import { Timedata } from "../timedata";
 import classes from "./task-view.module.css";
 
@@ -23,11 +24,7 @@ export const TaskView = ({
 
   return (
     <article className={classes.task}>
-      <input
-        className={classes.check}
-        type="checkbox"
-        onClick={() => handleClose(slug)}
-      />
+      <Checkbox onClick={() => handleClose(slug)} />
       <div>
         <p className={classes.description}>{description}</p>
         <footer className={classes.footer}>

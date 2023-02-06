@@ -6,41 +6,6 @@
   gap: 1.2rem;
 }
 
-.check {
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #fff;
-
-  font: inherit;
-  color: currentColor;
-  width: 2rem;
-  height: 2rem;
-  border: 2px solid var(--color-grey);
-  border-radius: 2px;
-  transform: translateY(0.2em);
-  margin: 0;
-
-  display: grid;
-  place-content: center;
-}
-
-.check::before {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--color-blue);
-
-  /* check icon */
-  transform-origin: bottom left;
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-}
-
-.check:checked::before {
-  transform: scale(1);
-}
-
 .description {
   margin: 0;
 }
