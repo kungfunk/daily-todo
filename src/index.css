@@ -1,12 +1,13 @@
 :root {
   --font-big: 2.2rem;
   --font-regular: 1.8rem;
-  --font-small: 1.2rem;
+  --font-small: 1.6rem;
 
   /* pico8 palette */
   --color-black: rgba(0, 0, 0, 0.8);
   --color-white: rgba(255, 255, 255, 1);
-  --color-grey: #777777;
+  --color-light-grey: rgba(0, 0, 0, 0.1);
+  --color-grey: #666666;
   --color-blue: #29adff;
   --color-dark-blue: #097ec6;
   --color-red: #ff004d;
@@ -16,6 +17,9 @@
 html {
   font-size: 62.5%;
   font-weight: 400;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   color: var(--color-black);
 }
 

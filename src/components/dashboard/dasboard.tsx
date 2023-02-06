@@ -8,6 +8,7 @@ export const Dashboard = () => {
   const { getTasksQuery } = useTasksStorage();
   const { data: tasks, isLoading, isError } = getTasksQuery();
   const [mode, setMode] = useState<"open-tasks" | "closed-tasks">("open-tasks");
+  const [showTaskForm, setShowTaskForm] = useState(false);
 
   const openTasks = tasks?.filter(({ is_closed }) => !is_closed);
   const closedTasks = tasks?.filter(({ is_closed }) => is_closed);
@@ -17,27 +18,29 @@ export const Dashboard = () => {
   }
 
   return (
-    <div className={classes.dashboard}>
-      {mode === "open-tasks" ? (
-        <>
+    <>
+      <div className={classes.dashboard}>
+        {mode === "open-tasks" ? (
+          <>
+            <TaskForm />
+            <TaskList
+              title="Current tasks"
+              tasks={openTasks}
+              buttonHandle={() => setMode("closed-tasks")}
+              buttonText="show closed tasks →"
+              emptyTasksMessage="No open tasks, hurray!"
+            />
+          </>
+        ) : (
           <TaskList
-            title="Current tasks"
-            tasks={openTasks}
-            buttonHandle={() => setMode("closed-tasks")}
-            buttonText="show closed tasks →"
-            emptyTasksMessage="No open tasks, hurray!"
+            title="History"
+            tasks={closedTasks}
+            buttonHandle={() => setMode("open-tasks")}
+            buttonText="← show open tasks"
+            emptyTasksMessage="No closed tasks yet, work harder!"
           />
-          <TaskForm />
-        </>
-      ) : (
-        <TaskList
-          title="History"
-          tasks={closedTasks}
-          buttonHandle={() => setMode("open-tasks")}
-          buttonText="← show open tasks"
-          emptyTasksMessage="No closed tasks yet, work harder!"
-        />
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };

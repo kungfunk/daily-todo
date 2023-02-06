@@ -32,7 +32,7 @@ export const TaskView = ({
             <Timedata prefix="Published" date={created_at} />
             <div className={classes.actions}>
               <Button showAsLink={true} onClick={() => handleDelete(slug)}>
-                Delete task
+                Delete
               </Button>
               <span>or</span>
               <Button showAsLink={true} onClick={() => handleClose(slug)}>
