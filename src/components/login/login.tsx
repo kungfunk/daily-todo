@@ -1,12 +1,12 @@
-import classes from "./login.module.css";
 import { FormEvent, useState } from "react";
-import { useClient } from "../../context/clientContext";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import classes from "./login.module.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const client = useClient();
+  const client = useSupabaseClient();
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

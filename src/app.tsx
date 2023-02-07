@@ -1,8 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthProvider } from "./context/authContext";
-import { ClientContext } from "./context/clientContext";
+import { Routes, Route } from "react-router-dom";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createSupabaseClient } from "./lib/supabase";
-import { Main } from "./components/main";
+import { Login } from "./components/login";
+import { Dashboard } from "./components/dashboard";
+import { RequireAuth } from "./components/require-auth";
+import { RequireAnon } from "./components/require-anon";
 
 export const App = () => {
   const queryClient = new QueryClient();
@@ -10,11 +13,26 @@ export const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ClientContext.Provider value={supabaseClient}>
-        <AuthProvider>
-          <Main />
-        </AuthProvider>
-      </ClientContext.Provider>
+      <SessionContextProvider supabaseClient={supabaseClient}>
+        <Routes>
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RequireAnon>
+                <Login />
+              </RequireAnon>
+            }
+          />
+        </Routes>
+      </SessionContextProvider>
     </QueryClientProvider>
   );
 };

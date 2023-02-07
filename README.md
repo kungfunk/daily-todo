@@ -18,6 +18,7 @@ npx supabase gen types typescript --project-id [project_id] > src/lib/database.t
 [x] Auth and data in supabase
 [x] Frontend with a lightweigth build step (vite)
 [x] Use react-query for caching
+[] Add filtering route based
 [] Use headless ui for components
 [] Add MDX support for Tasks
 [] Tests with Vitest

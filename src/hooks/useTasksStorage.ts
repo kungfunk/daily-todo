@@ -1,12 +1,11 @@
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useClient } from "../context/clientContext";
 import { generateSlug } from "../lib/slug";
-import { useSession } from "./useSession";
 
 export function useTasksStorage() {
-  const client = useClient();
+  const client = useSupabaseClient();
   const queryClient = useQueryClient();
-  const session = useSession();
+  const user = useUser();
 
   const cacheKey = ["tasks"];
   const tasksTable = "tasks";
@@ -45,7 +44,7 @@ export function useTasksStorage() {
       return client.from(tasksTable).insert({
         description: description,
         is_closed: false,
-        user_id: session!.user.id,
+        user_id: user?.id || null,
         slug: generateSlug(),
       });
     },

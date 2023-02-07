@@ -1,8 +1,8 @@
-import { useClient } from "../../context/clientContext";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Button } from "../button";
 
 export const LogoutButton = (): JSX.Element => {
-  const client = useClient();
+  const client = useSupabaseClient();
 
   const handleLogout = async () => {
     client.auth.signOut().catch(console.error);
