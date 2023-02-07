@@ -18,29 +18,27 @@ export const Dashboard = () => {
   }
 
   return (
-    <>
-      <div className={classes.dashboard}>
-        {mode === "open-tasks" ? (
-          <>
-            <TaskForm />
-            <TaskList
-              title="Current tasks"
-              tasks={openTasks}
-              buttonHandle={() => setMode("closed-tasks")}
-              buttonText="show closed tasks →"
-              emptyTasksMessage="No open tasks, hurray!"
-            />
-          </>
-        ) : (
+    <main className={classes.dashboard}>
+      {mode === "open-tasks" ? (
+        <>
+          <TaskForm />
           <TaskList
-            title="History"
-            tasks={closedTasks}
-            buttonHandle={() => setMode("open-tasks")}
-            buttonText="← show open tasks"
-            emptyTasksMessage="No closed tasks yet, work harder!"
+            title="Current tasks"
+            tasks={openTasks}
+            buttonHandle={() => setMode("closed-tasks")}
+            buttonText="show closed tasks →"
+            emptyTasksMessage="No open tasks, hurray!"
           />
-        )}
-      </div>
-    </>
+        </>
+      ) : (
+        <TaskList
+          title="History"
+          tasks={closedTasks}
+          buttonHandle={() => setMode("open-tasks")}
+          buttonText="← show open tasks"
+          emptyTasksMessage="No closed tasks yet, work harder!"
+        />
+      )}
+    </main>
   );
 };
