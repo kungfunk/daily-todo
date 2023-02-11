@@ -1,20 +1,22 @@
 import { TaskForm } from "../task-form";
 import { TaskList } from "../task-list";
 import classes from "./dashboard.module.css";
-import { useTasksStorage } from "../../hooks/useTasksStorage";
+import { useGetTasks } from "../../hooks/use-get-tasks";
 import { useState } from "react";
 
 export const Dashboard = () => {
-  const { getTasksQuery } = useTasksStorage();
-  const { data: tasks, isLoading, isError } = getTasksQuery();
+  const { data: tasks, isLoading, isError, error } = useGetTasks();
   const [mode, setMode] = useState<"open-tasks" | "closed-tasks">("open-tasks");
-  const [showTaskForm, setShowTaskForm] = useState(false);
 
   const openTasks = tasks?.filter(({ is_closed }) => !is_closed);
   const closedTasks = tasks?.filter(({ is_closed }) => is_closed);
 
   if (isLoading) {
     return <span>loading...</span>;
+  }
+
+  if (isError && error instanceof Error) {
+    <p>{error.message}</p>;
   }
 
   return (

@@ -1,4 +1,5 @@
-import { useTasksStorage } from "../../hooks/useTasksStorage";
+import { useCloseTask } from "../../hooks/use-close-task";
+import { useDeleteTask } from "../../hooks/use-delete-task";
 import { Task } from "../../lib/types";
 import { Button } from "../button";
 import { Checkbox } from "../checkbox";
@@ -12,7 +13,8 @@ export const TaskView = ({
   closed_at,
   is_closed,
 }: Omit<Task, "id" | "user_id">): JSX.Element => {
-  const { deleteTaskMutation, closeTaskMutation } = useTasksStorage();
+  const closeTaskMutation = useCloseTask();
+  const deleteTaskMutation = useDeleteTask();
 
   const handleDelete = (slug: string) => {
     deleteTaskMutation.mutate(slug);

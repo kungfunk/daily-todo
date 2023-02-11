@@ -22,4 +22,5 @@ npx supabase gen types typescript --project-id [project_id] > src/lib/database.t
 [] Use headless ui for components
 [] Add MDX support for Tasks
 [] Tests with Vitest
+[] Error loggin with sentry
 [] Add animations ✨
