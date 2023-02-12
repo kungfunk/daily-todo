@@ -6,12 +6,10 @@
   /* pico8 palette */
   --color-black: rgba(0, 0, 0, 0.8);
   --color-white: rgba(255, 255, 255, 1);
-  --color-light-grey: rgba(0, 0, 0, 0.1);
-  --color-grey: #666666;
-  --color-blue: #29adff;
-  --color-dark-blue: #097ec6;
-  --color-red: #ff004d;
-  --color-pink: #ff77a8;
+  --color-light-grey: #f7f8fa;
+  --color-grey: #3b4a4d;
+  --color-blue: #30c9e8;
+  --color-accent: #ff4432;
 }
 
 html {

@@ -1,0 +1,32 @@
+.menu {
+  padding: 3rem 1rem;
+  background-color: var(--color-light-grey);
+}
+
+.menu ul {
+  margin: 0 0 2rem 0;
+  padding: 0 0 2rem 0;
+  list-style: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu ul:last-child {
+  border-bottom: 0;
+}
+
+.menu a {
+  display: block;
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: var(--color-grey);
+}
+
+.menu a:hover {
+  color: var(--color-accent);
+}
+
+.menu li.selected a {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}

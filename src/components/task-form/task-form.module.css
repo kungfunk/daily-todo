@@ -7,4 +7,6 @@
   resize: none;
   font-family: inherit;
   font-size: var(--font-regular);
+  box-sizing: border-box;
+  margin-bottom: 2rem;
 }

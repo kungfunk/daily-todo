@@ -1,0 +1,6 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-grey);
+  justify-content: space-between;
+}

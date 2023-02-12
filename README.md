@@ -24,3 +24,4 @@ npx supabase gen types typescript --project-id [project_id] > src/lib/database.t
 [] Tests with Vitest
 [] Error loggin with sentry
 [] Add animations ✨
+[] Add fancy avatars from https://dicebear.com/how-to-use/js-library
