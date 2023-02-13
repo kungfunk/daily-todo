@@ -25,4 +25,4 @@ npx supabase gen types typescript --project-id [project_id] > src/lib/database.t
 [] Error loggin with sentry
 [] Add animations ✨
 [] Add simple icons
-[] Add fancy avatars from https://dicebear.com/how-to-use/js-library
+[x] Add fancy avatars from https://dicebear.com/how-to-use/js-library
