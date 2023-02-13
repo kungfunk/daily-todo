@@ -1,5 +1,4 @@
 import { useGetClosedTasks } from "../../hooks/use-get-closed-tasks";
-import { TaskForm } from "../task-form";
 import { TaskView } from "../task-view";
 
 export const ClosedTasks = () => {
@@ -12,12 +11,11 @@ export const ClosedTasks = () => {
   return (
     <>
       <h1>Closed tasks</h1>
-      <TaskForm />
       {isLoading ? (
         <p>loading...</p>
       ) : (
         <div>
-          {tasks ? (
+          {tasks && tasks.length > 0 ? (
             tasks.map((data) => <TaskView key={data.slug} {...data} />)
           ) : (
             <p>No closed tasks yet, work harder!</p>

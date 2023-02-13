@@ -8,14 +8,15 @@ export const useCloseTask = () => {
 
   return useMutation({
     mutationFn: async (slug: string) => {
+      const date = new Date(Date.now()).toISOString();
       return client
         .from("tasks")
-        .update({ is_closed: true, closed_at: Date.now().toString() })
+        .update({ is_closed: true, closed_at: date })
         .eq("slug", slug);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["tasks-open", "tasks-closed"],
+        queryKey: ["tasks"],
       });
     },
   });

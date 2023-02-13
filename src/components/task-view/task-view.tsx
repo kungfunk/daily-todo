@@ -26,7 +26,7 @@ export const TaskView = ({
 
   return (
     <article className={classes.task}>
-      <Checkbox onClick={() => handleClose(slug)} />
+      <Checkbox checked={is_closed} onClick={() => handleClose(slug)} />
       <div>
         <p className={classes.description}>{description}</p>
         <footer className={classes.footer}>

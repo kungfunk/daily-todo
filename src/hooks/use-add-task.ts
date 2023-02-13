@@ -22,7 +22,9 @@ export const useAddTask = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks-open"] });
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
     },
   });
 };

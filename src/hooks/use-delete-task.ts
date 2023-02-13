@@ -7,11 +7,17 @@ export const useDeleteTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (slug: string) => {
+    mutationFn: async (slug: string, hardDelete = false) => {
+      if (!hardDelete) {
+        return client
+          .from("tasks")
+          .update({ is_deleted: true })
+          .eq("slug", slug);
+      }
       return client.from("tasks").delete().eq("slug", slug);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks-open"] });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
   });
 };

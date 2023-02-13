@@ -16,6 +16,7 @@ export interface Database {
           description: string
           id: number
           is_closed: boolean
+          is_deleted: boolean
           slug: string
           user_id: string
         }
@@ -25,6 +26,7 @@ export interface Database {
           description?: string
           id?: number
           is_closed: boolean
+          is_deleted?: boolean
           slug: string
           user_id: string
         }
@@ -34,6 +36,7 @@ export interface Database {
           description?: string
           id?: number
           is_closed?: boolean
+          is_deleted?: boolean
           slug?: string
           user_id?: string
         }
@@ -46,6 +49,9 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
       [_ in never]: never
     }
   }
