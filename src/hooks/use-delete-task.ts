@@ -11,7 +11,7 @@ export const useDeleteTask = () => {
       return client.from("tasks").delete().eq("slug", slug);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["tasks-open"] });
     },
   });
 };

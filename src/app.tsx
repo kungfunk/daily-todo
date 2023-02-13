@@ -7,19 +7,34 @@ import { Dashboard } from "./components/dashboard";
 import { RequireAuth } from "./components/require-auth";
 import { RequireAnon } from "./components/require-anon";
 import ErrorPage from "./components/error-page/error-page";
+import { OpenTasks } from "./components/open-tasks";
+import { ClosedTasks } from "./components/closed-tasks";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    index: true,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "dashboard",
     element: (
       <RequireAuth>
         <Dashboard />
       </RequireAuth>
     ),
+    children: [
+      {
+        path: "open",
+        element: <OpenTasks />,
+      },
+      {
+        path: "closed",
+        element: <ClosedTasks />,
+      },
+    ],
   },
   {
-    path: "/login",
+    path: "login",
     element: (
       <RequireAnon>
         <Login />

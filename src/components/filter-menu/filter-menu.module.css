@@ -14,7 +14,7 @@
   border-bottom: 0;
 }
 
-.menu a {
+.navlink {
   display: block;
   border-radius: 3px;
   padding: 1rem 2rem;
@@ -22,11 +22,15 @@
   color: var(--color-grey);
 }
 
-.menu a:hover {
+.navlink:hover {
   color: var(--color-accent);
 }
 
-.menu li.selected a {
+.selected {
   background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.selected:hover {
   color: var(--color-white);
 }

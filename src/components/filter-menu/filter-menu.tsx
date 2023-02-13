@@ -1,48 +1,64 @@
+import { NavLink } from "react-router-dom";
 import classes from "./filter-menu.module.css";
 
-export type Filters =
-  | "today"
-  | "yesterday"
-  | "last-week"
-  | "open"
-  | "closed"
-  | "deleted";
+export const FILTERS = [
+  "today",
+  "yesterday",
+  "last-week",
+  "open",
+  "closed",
+  "deleted",
+] as const;
 
-interface FilterMenuProps {
-  activeFilter: Filters;
-  filterCallback: (filter: Filters) => void;
-}
+export type Filters = (typeof FILTERS)[number];
 
-export const FilterMenu = ({
-  activeFilter,
-  filterCallback,
-}: FilterMenuProps) => {
+export const FilterMenu = () => {
+  const getNavLinkClassName = ({ isActive }: { isActive: boolean }): string =>
+    isActive ? `${classes.selected} ${classes.navlink}` : classes.navlink;
+
   return (
     <nav className={classes.menu}>
       <ul>
-        <li className={activeFilter === "today" ? classes.selected : ""}>
-          <a href="">Today</a>
+        <li>
+          <NavLink to="/dashboard/open" className={getNavLinkClassName}>
+            Open
+          </NavLink>
         </li>
-        <li className={activeFilter === "yesterday" ? classes.selected : ""}>
-          <a href="">Closed yesterday</a>
+        <li>
+          <NavLink to="/dashboard/closed" className={getNavLinkClassName}>
+            Closed
+          </NavLink>
         </li>
-        <li className={activeFilter === "last-week" ? classes.selected : ""}>
-          <a href="">Closed last week</a>
+        <li>
+          <NavLink to="/dashboard/deleted" className={getNavLinkClassName}>
+            Deleted
+          </NavLink>
         </li>
       </ul>
       <ul>
-        <li className={activeFilter === "open" ? classes.selected : ""}>
-          <a onClick={() => filterCallback("open")} href="">
-            Open
-          </a>
+        <li>
+          <NavLink
+            to="/dashboard/history/today"
+            className={getNavLinkClassName}
+          >
+            Today
+          </NavLink>
         </li>
-        <li className={activeFilter === "closed" ? classes.selected : ""}>
-          <a onClick={() => filterCallback("closed")} href="">
-            Closed
-          </a>
+        <li>
+          <NavLink
+            to="/dashboard/history/yesterday"
+            className={getNavLinkClassName}
+          >
+            Yesterday
+          </NavLink>
         </li>
-        <li className={activeFilter === "deleted" ? classes.selected : ""}>
-          <a href="">Deleted</a>
+        <li>
+          <NavLink
+            to="/dashboard/history/last-week"
+            className={getNavLinkClassName}
+          >
+            Last week
+          </NavLink>
         </li>
       </ul>
     </nav>

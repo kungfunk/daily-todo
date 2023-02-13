@@ -14,7 +14,9 @@ export const useCloseTask = () => {
         .eq("slug", slug);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({
+        queryKey: ["tasks-open", "tasks-closed"],
+      });
     },
   });
 };
