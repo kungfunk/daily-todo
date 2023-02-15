@@ -4,3 +4,14 @@
   background-color: var(--color-grey);
   justify-content: space-between;
 }
+
+.power-off {
+  display: block;
+  border: 0;
+  background: none;
+}
+
+.power-off img {
+  height: 40px;
+  width: 40px;
+}

@@ -13,7 +13,9 @@ export const UserMenu = () => {
   return (
     <section className={classes.menu}>
       <Avatar seed={user?.email || "default"} />
-      <button onClick={handleLogout}>Logout</button>
+      <button className={classes["power-off"]} onClick={handleLogout}>
+        <img src="/power.svg" />
+      </button>
     </section>
   );
 };

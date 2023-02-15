@@ -1,8 +1,8 @@
 import { useGetTasks } from "../../hooks/use-get-tasks";
 import { TaskView } from "../task-view";
 
-export const ClosedTasks = () => {
-  const { data: tasks, isLoading, isError, error } = useGetTasks("closed");
+export const DeletedTasks = () => {
+  const { data: tasks, isLoading, isError, error } = useGetTasks("deleted");
 
   if (isError && error instanceof Error) {
     <p>{error.message}</p>;
@@ -10,7 +10,7 @@ export const ClosedTasks = () => {
 
   return (
     <>
-      <h1>Closed tasks</h1>
+      <h1>Deleted tasks</h1>
       {isLoading ? (
         <p>loading...</p>
       ) : (
@@ -18,7 +18,7 @@ export const ClosedTasks = () => {
           {tasks && tasks.length > 0 ? (
             tasks.map((data) => <TaskView key={data.slug} {...data} />)
           ) : (
-            <p>No closed tasks yet, work harder!</p>
+            <p>Nothing deleted. Yet.</p>
           )}
         </div>
       )}

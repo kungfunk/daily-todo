@@ -1,9 +1,9 @@
-import { useGetOpenTasks } from "../../hooks/use-get-open-tasks";
+import { useGetTasks } from "../../hooks/use-get-tasks";
 import { TaskForm } from "../task-form";
 import { TaskView } from "../task-view";
 
 export const OpenTasks = () => {
-  const { data: tasks, isLoading, isError, error } = useGetOpenTasks();
+  const { data: tasks, isLoading, isError, error } = useGetTasks("open");
 
   if (isError && error instanceof Error) {
     <p>{error.message}</p>;

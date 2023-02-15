@@ -9,6 +9,7 @@ import { RequireAnon } from "./components/require-anon";
 import ErrorPage from "./components/error-page/error-page";
 import { OpenTasks } from "./components/open-tasks";
 import { ClosedTasks } from "./components/closed-tasks";
+import { DeletedTasks } from "./components/deleted-tasks";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "closed",
         element: <ClosedTasks />,
+      },
+      {
+        path: "deleted",
+        element: <DeletedTasks />,
       },
     ],
   },
