@@ -2,7 +2,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useQuery } from "@tanstack/react-query";
 import { Database } from "../lib/database.types";
 
-type TaskStatus = "open" | "closed" | "deleted";
+export type TaskStatus = "open" | "closed" | "deleted";
 
 export function useGetTasks(status: TaskStatus) {
   const client = useSupabaseClient<Database>();

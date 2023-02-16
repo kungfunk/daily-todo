@@ -7,9 +7,7 @@ import { Dashboard } from "./components/dashboard";
 import { RequireAuth } from "./components/require-auth";
 import { RequireAnon } from "./components/require-anon";
 import ErrorPage from "./components/error-page/error-page";
-import { OpenTasks } from "./components/open-tasks";
-import { ClosedTasks } from "./components/closed-tasks";
-import { DeletedTasks } from "./components/deleted-tasks";
+import { TaskList } from "./components/task-list";
 
 const router = createBrowserRouter([
   {
@@ -26,15 +24,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "open",
-        element: <OpenTasks />,
+        element: <TaskList status="open" />,
       },
       {
         path: "closed",
-        element: <ClosedTasks />,
+        element: <TaskList status="closed" />,
       },
       {
         path: "deleted",
-        element: <DeletedTasks />,
+        element: <TaskList status="deleted" />,
       },
     ],
   },

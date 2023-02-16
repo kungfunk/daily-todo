@@ -2,9 +2,9 @@ import { FormEvent, KeyboardEvent, useState } from "react";
 import { useAddTask } from "../../hooks/use-add-task";
 import classes from "./task-form.module.css";
 
-export const TaskForm = (): JSX.Element => {
+export const TaskForm = ({ text = "" }): JSX.Element => {
   const { mutate, isLoading, isError, error } = useAddTask();
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(text);
   const [textRows, setTextRows] = useState(1);
 
   const handleAddTask = async (e: FormEvent<HTMLFormElement>) => {
