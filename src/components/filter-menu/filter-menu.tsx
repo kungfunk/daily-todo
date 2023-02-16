@@ -1,4 +1,12 @@
 import { NavLink } from "react-router-dom";
+import {
+  EnvelopeOpenIcon,
+  CheckboxIcon,
+  TrashIcon,
+  TimeTwentyFourIcon,
+  CalendarDayIcon,
+  CalendarWeekIcon,
+} from "../icons";
 import classes from "./filter-menu.module.css";
 
 export const FILTERS = [
@@ -21,19 +29,19 @@ export const FilterMenu = () => {
       <ul>
         <li>
           <NavLink to="/dashboard/open" className={getNavLinkClassName}>
-            <img className={classes.icon} src="/envelope-open-text.svg" />
+            <EnvelopeOpenIcon className={classes.icon} />
             Open
           </NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/closed" className={getNavLinkClassName}>
-            <img className={classes.icon} src="/checkbox.svg" />
+            <CheckboxIcon className={classes.icon} />
             Closed
           </NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/deleted" className={getNavLinkClassName}>
-            <img className={classes.icon} src="/trash.svg" />
+            <TrashIcon className={classes.icon} />
             Deleted
           </NavLink>
         </li>
@@ -44,7 +52,7 @@ export const FilterMenu = () => {
             to="/dashboard/history/today"
             className={getNavLinkClassName}
           >
-            <img className={classes.icon} src="/calendar-day.svg" />
+            <CalendarDayIcon className={classes.icon} />
             Today
           </NavLink>
         </li>
@@ -53,7 +61,7 @@ export const FilterMenu = () => {
             to="/dashboard/history/yesterday"
             className={getNavLinkClassName}
           >
-            <img className={classes.icon} src="/time-twenty-four.svg" />
+            <TimeTwentyFourIcon className={classes.icon} />
             Yesterday
           </NavLink>
         </li>
@@ -62,7 +70,7 @@ export const FilterMenu = () => {
             to="/dashboard/history/last-week"
             className={getNavLinkClassName}
           >
-            <img className={classes.icon} src="/calendar-week.svg" />
+            <CalendarWeekIcon className={classes.icon} />
             Last week
           </NavLink>
         </li>

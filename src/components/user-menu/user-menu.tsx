@@ -1,5 +1,6 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Avatar } from "../avatar";
+import { PowerOffIcon } from "../icons";
 import classes from "./user-menu.module.css";
 
 export const UserMenu = () => {
@@ -14,7 +15,7 @@ export const UserMenu = () => {
     <section className={classes.menu}>
       <Avatar seed={user?.email || "default"} />
       <button className={classes["power-off"]} onClick={handleLogout}>
-        <img src="/power.svg" />
+        <PowerOffIcon />
       </button>
     </section>
   );

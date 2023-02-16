@@ -10,6 +10,10 @@
   margin: 0;
 }
 
+.closed {
+  text-decoration: line-through;
+}
+
 .footer {
   display: flex;
   font-size: var(--font-small);

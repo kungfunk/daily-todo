@@ -9,6 +9,8 @@
   max-width: 68rem;
   margin: 0 auto;
   overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .content h1 {
