@@ -1,10 +1,22 @@
-import { TaskStatus, useGetTasks } from "../../hooks/use-get-tasks";
+import { TaskGroups, useGetTasks } from "../../hooks/use-get-tasks";
 import { TaskForm } from "../task-form";
 import { TaskView } from "../task-view";
 
-type DataProps = { [key in TaskStatus]: { title: string; emptyState: string } };
+type DataProps = { [key in TaskGroups]: { title: string; emptyState: string } };
 
-const data: DataProps = {
+const groupMetadata: DataProps = {
+  today: {
+    title: "Today",
+    emptyState: "Nothing yet.",
+  },
+  yesterday: {
+    title: "Yesterday",
+    emptyState: "Nothing to see.",
+  },
+  "last-week": {
+    title: "Last week",
+    emptyState: "Nothing to see.",
+  },
   open: {
     title: "Open tasks",
     emptyState: "No open tasks, hurray!",
@@ -19,8 +31,8 @@ const data: DataProps = {
   },
 };
 
-export const TaskList = ({ status }: { status: TaskStatus }) => {
-  const { data: tasks, isLoading, isError, error } = useGetTasks(status);
+export const TaskList = ({ group }: { group: TaskGroups }) => {
+  const { data: tasks, isLoading, isError, error } = useGetTasks(group);
 
   if (isError && error instanceof Error) {
     <p>{error.message}</p>;
@@ -28,7 +40,7 @@ export const TaskList = ({ status }: { status: TaskStatus }) => {
 
   return (
     <>
-      <h1>{data[status].title}</h1>
+      <h1>{groupMetadata[group].title}</h1>
       <TaskForm />
       {isLoading ? (
         <p>loading...</p>
@@ -37,7 +49,7 @@ export const TaskList = ({ status }: { status: TaskStatus }) => {
           {tasks && tasks.length > 0 ? (
             tasks.map((data) => <TaskView key={data.slug} {...data} />)
           ) : (
-            <p>{data[status].emptyState}</p>
+            <p>{groupMetadata[group].emptyState}</p>
           )}
         </div>
       )}

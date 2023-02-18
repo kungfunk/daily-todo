@@ -7,7 +7,6 @@ import { Dashboard } from "./components/dashboard";
 import { RequireAuth } from "./components/require-auth";
 import { RequireAnon } from "./components/require-anon";
 import ErrorPage from "./components/error-page/error-page";
-import { TaskList } from "./components/task-list";
 
 const router = createBrowserRouter([
   {
@@ -15,26 +14,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "dashboard",
+    path: "dashboard/:group",
     element: (
       <RequireAuth>
         <Dashboard />
       </RequireAuth>
     ),
-    children: [
-      {
-        path: "open",
-        element: <TaskList status="open" />,
-      },
-      {
-        path: "closed",
-        element: <TaskList status="closed" />,
-      },
-      {
-        path: "deleted",
-        element: <TaskList status="deleted" />,
-      },
-    ],
+    errorElement: <ErrorPage />,
   },
   {
     path: "login",

@@ -1,6 +1,7 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Database } from "../lib/database.types";
+import { getCurrentTimestampz } from "../lib/date";
 
 export const useToggleTask = () => {
   const client = useSupabaseClient<Database>();
@@ -14,7 +15,7 @@ export const useToggleTask = () => {
       slug: string;
       isClosed: boolean;
     }) => {
-      const date = new Date(Date.now()).toISOString();
+      const date = getCurrentTimestampz();
       return client
         .from("tasks")
         .update({ is_closed: isClosed, closed_at: isClosed ? date : null })

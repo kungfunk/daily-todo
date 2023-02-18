@@ -9,17 +9,6 @@ import {
 } from "../icons";
 import classes from "./filter-menu.module.css";
 
-export const FILTERS = [
-  "today",
-  "yesterday",
-  "last-week",
-  "open",
-  "closed",
-  "deleted",
-] as const;
-
-export type Filters = (typeof FILTERS)[number];
-
 export const FilterMenu = () => {
   const getNavLinkClassName = ({ isActive }: { isActive: boolean }): string =>
     isActive ? `${classes.selected} ${classes.navlink}` : classes.navlink;
@@ -48,28 +37,19 @@ export const FilterMenu = () => {
       </ul>
       <ul>
         <li>
-          <NavLink
-            to="/dashboard/history/today"
-            className={getNavLinkClassName}
-          >
+          <NavLink to="/dashboard/today" className={getNavLinkClassName}>
             <CalendarDayIcon className={classes.icon} />
             Today
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/dashboard/history/yesterday"
-            className={getNavLinkClassName}
-          >
+          <NavLink to="/dashboard/yesterday" className={getNavLinkClassName}>
             <TimeTwentyFourIcon className={classes.icon} />
             Yesterday
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/dashboard/history/last-week"
-            className={getNavLinkClassName}
-          >
+          <NavLink to="/dashboard/last-week" className={getNavLinkClassName}>
             <CalendarWeekIcon className={classes.icon} />
             Last week
           </NavLink>
