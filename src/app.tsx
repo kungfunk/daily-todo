@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createSupabaseClient } from "./lib/supabase";
@@ -33,7 +34,13 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   const supabaseClient = createSupabaseClient();
 
   return (
@@ -41,6 +48,7 @@ export const App = () => {
       <SessionContextProvider supabaseClient={supabaseClient}>
         <RouterProvider router={router} />
       </SessionContextProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
