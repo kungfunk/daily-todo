@@ -62,7 +62,6 @@ export const TaskView = ({
   const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsEditMode(true);
-    console.log(textareaRef);
     textareaRef.current?.focus();
   };
 

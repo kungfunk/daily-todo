@@ -3,15 +3,17 @@
   flex-direction: column;
   background-color: var(--color-grey);
   justify-content: space-between;
+  padding-bottom: 1rem;
 }
 
-.power-off {
+.logout {
   display: block;
   border: 0;
   background: none;
+  color: var(--color-light-grey);
 }
 
-.power-off img {
-  height: 40px;
-  width: 40px;
+.icon {
+  height: 4rem;
+  width: 4rem;
 }

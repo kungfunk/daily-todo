@@ -14,8 +14,8 @@ export const UserMenu = () => {
   return (
     <section className={classes.menu}>
       <Avatar seed={user?.email || "default"} />
-      <button className={classes["power-off"]} onClick={handleLogout}>
-        <PowerOffIcon />
+      <button className={classes.logout} onClick={handleLogout}>
+        <PowerOffIcon className={classes.icon} />
       </button>
     </section>
   );
