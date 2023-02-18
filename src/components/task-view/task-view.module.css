@@ -4,6 +4,14 @@
   grid-template-columns: 2rem auto;
   align-items: start;
   gap: 1.2rem;
+  margin: 0 -3rem 1rem -3rem;
+  padding: 1rem 3rem;
+  box-sizing: border-box;
+}
+
+.selected {
+  padding: 1rem 3rem 1rem 2.5rem;
+  border-left: 0.5rem solid var(--color-blue);
 }
 
 .description {
@@ -18,9 +26,10 @@
   display: flex;
   font-size: var(--font-small);
   gap: 1rem;
+  justify-content: space-between;
 }
 
 .actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }

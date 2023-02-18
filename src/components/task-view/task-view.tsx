@@ -1,59 +1,104 @@
 import { useToggleTask } from "../../hooks/use-toggle-task";
 import { useDeleteTask } from "../../hooks/use-delete-task";
-import { Task } from "../../lib/types";
 import { Button } from "../button";
 import { Checkbox } from "../checkbox";
 import { Timedata } from "../timedata";
 import classes from "./task-view.module.css";
-import { useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 import { TrashIcon } from "../icons/trash-icon";
+import { TaskForm } from "../task-form";
+import { EditIcon } from "../icons/edit-icon";
+import { useEditTask } from "../../hooks/use-edit-task";
+
+interface TaskViewProps {
+  id: string;
+  description: string;
+  date: string | null;
+  state: "open" | "closed" | "deleted";
+  isSelected: boolean;
+  onSelect: VoidFunction;
+}
 
 export const TaskView = ({
-  slug,
+  id,
   description,
-  created_at,
-  closed_at,
-  is_closed,
-  is_deleted,
-}: Omit<Task, "id" | "user_id">): JSX.Element => {
+  date,
+  state = "open",
+  isSelected = false,
+  onSelect,
+}: TaskViewProps): JSX.Element => {
   const closeTaskMutation = useToggleTask();
   const deleteTaskMutation = useDeleteTask();
-  const [checked, setChecked] = useState(is_closed);
+  const editTaskMutation = useEditTask();
 
-  const timedata = {
-    prefix: is_closed ? "Closed" : "Published",
-    date: is_closed ? closed_at : created_at,
+  const isClosed = state === "closed";
+  const isDeleted = state === "deleted";
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [checked, setChecked] = useState(isClosed);
+  const [isEditMode, setIsEditMode] = useState(isSelected);
+
+  const timedataPrefix = isClosed ? "Closed" : "Published";
+  const taskClassName = `${classes.task} ${isSelected ? classes.selected : ""}`;
+  const descriptionClassName = `${classes.description} ${
+    isClosed ? classes.closed : ""
+  }`;
+
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    deleteTaskMutation.mutate(id);
   };
 
-  const handleDelete = (slug: string) => {
-    deleteTaskMutation.mutate(slug);
-  };
-
-  const handleToggle = (slug: string) => {
+  const handleToggle = () => {
     setChecked(!checked);
-    closeTaskMutation.mutate({ slug, isClosed: !checked });
+    closeTaskMutation.mutate({ slug: id, isClosed: !checked });
+  };
+
+  const handleSave = (description: string) => {
+    editTaskMutation.mutate({ slug: id, description });
+    setIsEditMode(false);
+  };
+
+  const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsEditMode(true);
+    console.log(textareaRef);
+    textareaRef.current?.focus();
   };
 
   return (
-    <article className={classes.task}>
-      <Checkbox checked={checked} onChange={() => handleToggle(slug)} />
+    <article className={taskClassName} onClick={onSelect}>
+      <Checkbox checked={checked} onChange={handleToggle} />
       <div>
-        <p
-          className={`${classes.description} ${
-            is_closed ? classes.closed : ""
-          }`}
-        >
-          {description}
-        </p>
+        {isEditMode ? (
+          <TaskForm
+            isLoading={editTaskMutation.isLoading}
+            isError={editTaskMutation.isError}
+            error={editTaskMutation.error}
+            handleSave={handleSave}
+            ref={textareaRef}
+          >
+            {description}
+          </TaskForm>
+        ) : (
+          <p className={descriptionClassName}>{description}</p>
+        )}
         <footer className={classes.footer}>
-          <Timedata {...timedata} />
-          <div className={classes.actions}>
-            {!is_deleted && (
-              <Button showAsLink={true} onClick={() => handleDelete(slug)}>
-                <TrashIcon /> Delete
-              </Button>
-            )}
-          </div>
+          <Timedata date={date} prefix={timedataPrefix} />
+          {isSelected && (
+            <div className={classes.actions}>
+              {!isDeleted && !isEditMode && (
+                <Button showAsLink={true} onClick={handleDelete}>
+                  <TrashIcon /> Delete
+                </Button>
+              )}
+              {!isEditMode && (
+                <Button showAsLink={true} onClick={handleEdit}>
+                  <EditIcon /> Edit
+                </Button>
+              )}
+            </div>
+          )}
         </footer>
       </div>
     </article>

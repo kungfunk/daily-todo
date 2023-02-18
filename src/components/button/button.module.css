@@ -16,9 +16,8 @@
   /* end reset */
   color: var(--color-dark-blue);
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .button_as_link:hover {
-  color: var(--color-blue);
+  color: var(--color-accent);
 }

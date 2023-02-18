@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useAddTask } from "../../hooks/use-add-task";
 import { TaskGroups, useGetTasks } from "../../hooks/use-get-tasks";
 import { TaskForm } from "../task-form";
 import { TaskView } from "../task-view";
@@ -32,22 +34,45 @@ const groupMetadata: DataProps = {
 };
 
 export const TaskList = ({ group }: { group: TaskGroups }) => {
-  const { data: tasks, isLoading, isError, error } = useGetTasks(group);
+  const { data: tasks, ...tasksQuery } = useGetTasks(group);
+  const addTaskMutation = useAddTask();
+  const [taskSelected, setTaskSelected] = useState("");
 
-  if (isError && error instanceof Error) {
-    <p>{error.message}</p>;
+  if (tasksQuery.isError && tasksQuery.error instanceof Error) {
+    <p>{tasksQuery.error.message}</p>;
   }
 
   return (
     <>
       <h1>{groupMetadata[group].title}</h1>
-      <TaskForm />
-      {isLoading ? (
+      <TaskForm
+        isLoading={addTaskMutation.isLoading}
+        isError={addTaskMutation.isError}
+        error={addTaskMutation.error}
+        handleSave={addTaskMutation.mutate}
+      />
+      {tasksQuery.isLoading ? (
         <p>loading...</p>
       ) : (
         <div>
           {tasks && tasks.length > 0 ? (
-            tasks.map((data) => <TaskView key={data.slug} {...data} />)
+            tasks.map((data) => (
+              <TaskView
+                key={data.slug}
+                isSelected={taskSelected === data.slug}
+                id={data.slug}
+                description={data.description}
+                date={data.is_closed ? data.closed_at : data.created_at}
+                onSelect={() => setTaskSelected(data.slug)}
+                state={
+                  data.is_closed
+                    ? "closed"
+                    : data.is_deleted
+                    ? "deleted"
+                    : "open"
+                }
+              />
+            ))
           ) : (
             <p>{groupMetadata[group].emptyState}</p>
           )}
