@@ -1,5 +1,5 @@
 import format from "date-fns/format";
-import formatRelative from "date-fns/formatRelative";
+import formatDistance from "date-fns/formatDistance";
 import subDays from "date-fns/subDays";
 
 export function getCurrentTimestampz() {
@@ -21,5 +21,9 @@ export function getLastWeekDate() {
 export function getRelativeReadableDate(value: string) {
   const taskDate = new Date(value);
   const currentDate = new Date();
-  return formatRelative(taskDate, currentDate, { addSuffix: true });
+  return formatDistance(taskDate, currentDate, { addSuffix: true });
+}
+
+export function getDateTime(value: string) {
+  return format(new Date(value), "yyyy-MM-dd hh:mm:ss.SSS");
 }
