@@ -1,16 +1,12 @@
 :root {
-  --font-supa: 4rem;
   --font-big: 2.2rem;
   --font-regular: 1.6rem;
   --font-small: 1.4rem;
-
-  /* pico8 palette */
   --color-black: rgba(0, 0, 0, 0.8);
   --color-white: rgba(255, 255, 255, 1);
   --color-light-grey: #f7f8fa;
   --color-grey: #3b4a4d;
   --color-blue: #30c9e8;
-  --color-purple: rgba(90, 82, 218, 1);
   --color-accent: #ff4432;
 }
 

@@ -6,6 +6,10 @@
   padding-bottom: 1rem;
 }
 
+.avatar {
+  margin: 1rem;
+}
+
 .logout {
   display: block;
   border: 0;

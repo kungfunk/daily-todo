@@ -1,6 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createSupabaseClient } from "./lib/supabase";
 import { Login } from "./components/login";
@@ -13,6 +17,11 @@ const router = createBrowserRouter([
   {
     index: true,
     errorElement: <ErrorPage />,
+    element: <Navigate to="/dashboard/open" />,
+  },
+  {
+    path: "dashboard",
+    element: <Navigate to="/dashboard/open" />,
   },
   {
     path: "dashboard/:group",
@@ -48,7 +57,7 @@ export const App = () => {
       <SessionContextProvider supabaseClient={supabaseClient}>
         <RouterProvider router={router} />
       </SessionContextProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
 };

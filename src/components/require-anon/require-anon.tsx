@@ -10,7 +10,7 @@ export function RequireAnon({ children }: { children: JSX.Element }) {
   }
 
   if (!isLoading && session?.user) {
-    return <Navigate to="/" state={{ from: location }} replace />;
+    return <Navigate to="/dashboard/open" state={{ from: location }} replace />;
   }
   return children;
 }

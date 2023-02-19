@@ -7,4 +7,3 @@ export * from "./power-off-icon";
 export * from "./time-twenty-four-icon";
 export * from "./trash-icon";
 export * from "./edit-icon";
-export * from "./save-icon";

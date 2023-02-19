@@ -6,6 +6,7 @@ import classes from "./login.module.css";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const [error, setError] = useState("");
   const client = useSupabaseClient();
   const defaultAvatarSeed = "asdafewqropz";
@@ -23,6 +24,7 @@ export const Login = () => {
       setError(error.error_description);
     } finally {
       setIsLoading(false);
+      setIsEmailSent(true);
     }
   };
 
@@ -31,9 +33,9 @@ export const Login = () => {
       <div className={classes.container}>
         <div className={classes.logo}>
           <h1 className={classes.jumbo}>
-            Daily
+            daily
             <br />
-            TODO
+            to-do
           </h1>
         </div>
         <div className={classes.content}>
@@ -45,30 +47,44 @@ export const Login = () => {
               alt="This is your avatar"
               title="This is your avatar"
             />
-            <h2 className={classes.title}>Hello!</h2>
-            <p className={classes.subtitle}>
-              Pssst... enter your email and receive a magic link, no passwords
-              needed! 🤫
-            </p>
-            <form className={classes.form} onSubmit={handleOnSubmit}>
-              {error && <div>{error}</div>}
-              <input
-                className={classes.input}
-                id="email"
-                type="email"
-                placeholder="your-email@example.com"
-                value={email}
-                disabled={isLoading}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button
-                className={classes.button}
-                type="submit"
-                disabled={isLoading}
-              >
-                {isLoading ? "Sending..." : "Send magic link"}
-              </button>
-            </form>
+            {!isEmailSent ? (
+              <>
+                <h2 className={classes.title}>Hello!</h2>
+                <p className={classes.subtitle}>
+                  Pssst... enter your email and receive a magic link, no
+                  passwords needed! 🤫
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className={classes.title}>Hurray!</h2>
+                <p>
+                  📬 Email sent! please check your email and click in the link
+                  to access your <i> daily to-do.</i>
+                </p>
+              </>
+            )}
+            {!isEmailSent && (
+              <form className={classes.form} onSubmit={handleOnSubmit}>
+                {error && <div>{error}</div>}
+                <input
+                  className={classes.input}
+                  id="email"
+                  type="email"
+                  placeholder="your-email@example.com"
+                  value={email}
+                  disabled={isLoading}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button
+                  className={classes.button}
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Sending..." : "Send magic link"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
