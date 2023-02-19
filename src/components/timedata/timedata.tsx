@@ -1,4 +1,3 @@
-import format from "date-fns/format";
 import { getDateTime, getRelativeReadableDate } from "../../lib/date";
 import classes from "./timedata.module.css";
 
