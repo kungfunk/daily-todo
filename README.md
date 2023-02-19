@@ -1,4 +1,4 @@
-# daily TODO app
+# daily todo app
 
 App to track tasks in an easy way
 
@@ -14,15 +14,15 @@ npx supabase gen types typescript --project-id [project_id] > src/lib/database.t
 
 ## Wishlist
 
-[] Deploy somewhere (netlify probably)
-[x] Auth and data in supabase
-[x] Frontend with a lightweigth build step (vite)
-[x] Use react-query for caching
-[] Add filtering route based
-[] Use headless ui for components
-[] Add MDX support for Tasks
-[] Tests with Vitest
-[] Error loggin with sentry
-[] Add animations ✨
-[] Add simple icons
-[x] Add fancy avatars from https://dicebear.com/how-to-use/js-library
+- [ ] Deploy somewhere (netlify probably)
+- [x] Auth and data in supabase
+- [x] Frontend with a lightweigth build step (vite)
+- [x] Use react-query for caching
+- [x] Add filtering route based
+- [ ] Use headless ui for components
+- [ ] Add MDX support for Tasks
+- [ ] Tests with Vitest
+- [ ] Error loggin with sentry
+- [ ] Add animations ✨
+- [x] Add simple icons
+- [x] Add fancy avatars from https://dicebear.com/how-to-use/js-library
